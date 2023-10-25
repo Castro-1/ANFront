@@ -1,3 +1,3 @@
-export default function Lagrange(){
-    return <div>Lagrange</div>
+export default function Lagrange() {
+  return <div>Lagrange</div>;
 }
