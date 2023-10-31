@@ -26,11 +26,12 @@ const Biseccion = () => {
   const handleSubmit = async () => {
     let data = {
       fun: inputs["fun"],
-      a: parseInt(inputs["a"]),
-      b: parseInt(inputs["b"]),
+      a: parseFloat(inputs["a"]),
+      b: parseFloat(inputs["b"]),
       tol: parseFloat(inputs["tol"]),
       niter: parseInt(inputs["niter"]),
     };
+
     const response = await axios.post(
       "http://127.0.0.1:8000/part1/biseccion/",
       data
