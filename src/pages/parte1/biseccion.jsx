@@ -51,6 +51,7 @@ const Biseccion = () => {
   };
 
   const ResultsTable = ({ found, a, b, x, f, e }) => {
+    console.log(a);
     const rows = a.map((value, i) => (
       <tr key={i}>
         <td>{i}</td>
