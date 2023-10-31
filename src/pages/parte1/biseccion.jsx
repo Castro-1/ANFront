@@ -123,6 +123,7 @@ const Biseccion = () => {
           <option value="absoluto">Error absoluto</option>
           <option value="relativo">Error relativo</option>
         </select>
+        <button onClick={handleSubmit}>Solucionar</button>
       </div>
       {graph && <Function method={"Bisección"} expression={inputs["fun"]} />}
       {result !== null && <ResultsTable {...result} />}
