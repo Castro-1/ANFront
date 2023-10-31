@@ -13,17 +13,6 @@ const Biseccion = () => {
   const [result, setResult] = useState(null);
   const [graph, setGraph] = useState(false);
 
-  // const handleFunction = (ev) => {
-  //   let fun = ev.target.value.replace(/\^/g, "**");
-  //   setInputs((prev) => ({
-  //     ...prev,
-  //     fun,
-  //   }));
-  //   setGraph(false);
-  // };
-
-  // console.log(fx);
-
   const handleInputs = (ev) => {
     let value = ev.target.value;
     if (ev.target.name === "fun") {
@@ -51,9 +40,8 @@ const Biseccion = () => {
   };
 
   const ResultsTable = ({ found, a, b, x, f, e }) => {
-    console.log(a);
     const rows = a.map((value, i) => (
-      <tr key={i}>
+      <tr key={i} className="[&>*]:border-[0.1px]">
         <td>{i}</td>
         <td>{a[i]}</td>
         <td>{b[i]}</td>
@@ -63,12 +51,11 @@ const Biseccion = () => {
       </tr>
     ));
 
-    console.log(rows);
     return (
-      <table>
-        <thead>
+      <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
+        <thead className="">
           <tr>
-            <th>Iteración</th>
+            <th className="m-5">Iteración</th>
             <th>a</th>
             <th>b</th>
             <th>x</th>
@@ -76,7 +63,7 @@ const Biseccion = () => {
             <th>error</th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody className="[&>*]:border-[0.1px]">{rows}</tbody>
       </table>
     );
   };
@@ -91,6 +78,7 @@ const Biseccion = () => {
           onChange={handleInputs}
           name="fun"
         />
+        <button onClick={()=>setGraph(true)}>Graficar</button>
         <input
           type="number"
           name="a"

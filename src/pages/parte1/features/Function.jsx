@@ -39,7 +39,7 @@ export default function Function({ expression, method, color="green" }) {
             return;
         }
 
-        const minX = 0;
+        const minX = expression.includes("log") || expression.includes("ln") ? 0 : -20;
         const maxX = 20;
         const step = 0.1;
 
