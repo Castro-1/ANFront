@@ -9,6 +9,7 @@ const Biseccion = () => {
     b: 0,
     tol: 0.0,
     niter: 0,
+    error: 0,
   });
   const [result, setResult] = useState(null);
   const [graph, setGraph] = useState(false);
@@ -30,6 +31,7 @@ const Biseccion = () => {
       b: parseFloat(inputs["b"]),
       tol: parseFloat(inputs["tol"]),
       niter: parseInt(inputs["niter"]),
+      error: parseInt(inputs["error"])
     };
 
     const response = await axios.post(
@@ -68,6 +70,8 @@ const Biseccion = () => {
       </table>
     );
   };
+
+  console.log(inputs)
 
   return (
     <div>
@@ -108,9 +112,9 @@ const Biseccion = () => {
           onChange={handleInputs}
           value={inputs["niter"]}
         />
-        <select name="error">
-          <option value="absoluto">Error absoluto</option>
-          <option value="relativo">Error relativo</option>
+        <select name="error" onChange={handleInputs} value={inputs["error"]}>
+          <option value={0}>Error absoluto</option>
+          <option value={1}>Error relativo</option>
         </select>
         <button onClick={handleSubmit}>Solucionar</button>
       </div>
