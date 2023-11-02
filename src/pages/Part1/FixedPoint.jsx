@@ -1,11 +1,11 @@
-export default function ReglaFalsa() {
+export default function FixedPoint() {
   return (
     <div>
-      <h2>Regla Falsa</h2>
+      <h2>Punto Fijo</h2>
       <div>
         <input placeholder="f(x)" />
+        <input placeholder="g(x)" />
         <input placeholder="a" />
-        <input placeholder="b" />
         <input placeholder="Tolerancia" />
         <select>
           <option value="absoluto">Error absoluto</option>

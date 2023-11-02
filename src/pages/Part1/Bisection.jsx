@@ -2,7 +2,7 @@ import { useState } from "react";
 import Function from "./features/Function";
 import axios from "axios";
 
-const Biseccion = () => {
+export default function Bisection() {
   const [inputs, setInputs] = useState({
     fun: "",
     a: 0,
@@ -31,7 +31,7 @@ const Biseccion = () => {
       b: parseFloat(inputs["b"]),
       tol: parseFloat(inputs["tol"]),
       niter: parseInt(inputs["niter"]),
-      error: parseInt(inputs["error"])
+      error: parseInt(inputs["error"]),
     };
 
     const response = await axios.post(
@@ -71,8 +71,6 @@ const Biseccion = () => {
     );
   };
 
-  console.log(inputs)
-
   return (
     <div>
       <h2>Bisección</h2>
@@ -83,7 +81,7 @@ const Biseccion = () => {
           onChange={handleInputs}
           name="fun"
         />
-        <button onClick={()=>setGraph(true)}>Graficar</button>
+        <button onClick={() => setGraph(true)}>Graficar</button>
         <input
           type="number"
           name="a"
@@ -122,6 +120,4 @@ const Biseccion = () => {
       {result !== null && <ResultsTable {...result} />}
     </div>
   );
-};
-
-export default Biseccion;
+}

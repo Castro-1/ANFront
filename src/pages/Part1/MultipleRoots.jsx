@@ -1,9 +1,11 @@
-export default function Secante() {
+export default function MultipleRoots() {
   return (
     <div>
-      <h2>Secante</h2>
+      <h2>Raices Multiples</h2>
       <div>
         <input placeholder="f(x)" />
+        <input placeholder="f'(x)" />
+        <input placeholder="f''(x)" />
         <input placeholder="x0" />
         <input placeholder="Tolerancia" />
         <select>

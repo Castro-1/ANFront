@@ -1,20 +1,20 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/home";
+import "./styles/App.css";
+import Home from "./pages/Home";
 import Layout from "./components/Layout";
-import SOR from "./pages/parte2/sor";
-import Newton from "./pages/parte1/newton";
-import Jacobi from "./pages/parte2/jacobi";
-import Spline from "./pages/parte3/spline";
-import Newton2 from "./pages/parte3/newton";
-import Secante from "./pages/parte1/secante";
-import Lagrange from "./pages/parte3/lagrange";
-import Biseccion from "./pages/parte1/biseccion";
-import PuntoFijo from "./pages/parte1/punto-fijo";
-import ReglaFalsa from "./pages/parte1/regla-falsa";
-import Vandermonde from "./pages/parte3/vandermonde";
-import GaussSeidel from "./pages/parte2/gauss-seidel";
-import RaicesMultiples from "./pages/parte1/raices-multiples";
+import SOR from "./pages/Part2/SOR";
+import Newton from "./pages/Part1/Newton";
+import Jacobi from "./pages/Part2/Jacobi";
+import Spline from "./pages/Part3/Spline";
+import Newton2 from "./pages/Part3/Newton";
+import Secant from "./pages/Part1/Secant";
+import Lagrange from "./pages/Part3/Lagrange";
+import Bisection from "./pages/Part1/Bisection";
+import FixedPoint from "./pages/Part1/FixedPoint";
+import FasleRule from "./pages/Part1/FalseRule";
+import Vandermonde from "./pages/Part3/Vandermonde";
+import GaussSeidel from "./pages/Part2/GaussSeidel";
+import MultipleRoots from "./pages/Part1/MultipleRoots";
 
 function App() {
   return (
@@ -23,11 +23,11 @@ function App() {
         <Route index element={<Home />} />
         {/* parte 1 */}
         <Route path="parte1/newton" element={<Newton />} />
-        <Route path="parte1/secante" element={<Secante />} />
-        <Route path="parte1/biseccion" element={<Biseccion />} />
-        <Route path="parte1/punto-fijo" element={<PuntoFijo />} />
-        <Route path="parte1/regla-falsa" element={<ReglaFalsa />} />
-        <Route path="parte1/raices-multiples" element={<RaicesMultiples />} />
+        <Route path="parte1/secante" element={<Secant />} />
+        <Route path="parte1/biseccion" element={<Bisection />} />
+        <Route path="parte1/punto-fijo" element={<FixedPoint />} />
+        <Route path="parte1/regla-falsa" element={<FasleRule />} />
+        <Route path="parte1/raices-multiples" element={<MultipleRoots />} />
         {/* parte 2 */}
         <Route path="parte2/gauss-seidel" element={<GaussSeidel />} />
         <Route path="parte2/jacobi" element={<Jacobi />} />
