@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Function from "./features/Function";
 import axios from "axios";
+import Button from "../../components/Button";
 
 export default function Bisection() {
   const [inputs, setInputs] = useState({
@@ -81,7 +82,7 @@ export default function Bisection() {
           onChange={handleInputs}
           name="fun"
         />
-        <button onClick={() => setGraph(true)}>Graficar</button>
+        <Button onClick={() => setGraph(true)}>Graficar</Button>
         <input
           type="number"
           name="a"
@@ -114,7 +115,7 @@ export default function Bisection() {
           <option value={0}>Error absoluto</option>
           <option value={1}>Error relativo</option>
         </select>
-        <button onClick={handleSubmit}>Solucionar</button>
+        <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
       {graph && <Function method={"Bisección"} expression={inputs["fun"]} />}
       {result !== null && <ResultsTable {...result} />}
