@@ -2,15 +2,17 @@ import { useState } from "react";
 import Function from "./features/Function";
 import axios from "axios";
 import Button from "../../components/Button";
+import Input from "../../components/inputs/Input";
+import Select from "../../components/inputs/Select";
 
 export default function Bisection() {
   const [inputs, setInputs] = useState({
     fun: "",
-    a: 0,
-    b: 0,
-    tol: 0.0,
-    niter: 0,
-    error: 0,
+    a: "",
+    b: "",
+    tol: "",
+    niter: "",
+    error: "",
   });
   const [result, setResult] = useState(null);
   const [graph, setGraph] = useState(false);
@@ -27,12 +29,12 @@ export default function Bisection() {
 
   const handleSubmit = async () => {
     let data = {
-      fun: inputs["fun"],
-      a: parseFloat(inputs["a"]),
-      b: parseFloat(inputs["b"]),
-      tol: parseFloat(inputs["tol"]),
-      niter: parseInt(inputs["niter"]),
-      error: parseInt(inputs["error"]),
+      fun: inputs.fun,
+      a: parseFloat(inputs.a),
+      b: parseFloat(inputs.b),
+      tol: parseFloat(inputs.tol),
+      niter: parseInt(inputs.niter),
+      error: parseInt(inputs.error),
     };
 
     const response = await axios.post(
@@ -76,45 +78,41 @@ export default function Bisection() {
     <div>
       <h2>Bisección</h2>
       <div>
-        <input
+        <Input
           placeholder="f(x)"
-          value={inputs["fun"]}
+          value={inputs.fun}
           onChange={handleInputs}
           name="fun"
         />
         <Button onClick={() => setGraph(true)}>Graficar</Button>
-        <input
-          type="number"
+        <Input
           name="a"
           placeholder="a"
           onChange={handleInputs}
-          value={inputs["a"]}
+          value={inputs.a}
         />
-        <input
-          type="number"
+        <Input
           name="b"
           placeholder="b"
           onChange={handleInputs}
-          value={inputs["b"]}
+          value={inputs.b}
         />
-        <input
-          type="number"
+        <Input
           name="tol"
           placeholder="tolerancia"
           onChange={handleInputs}
-          value={inputs["tol"]}
+          value={inputs.tol}
         />
-        <input
-          type="number"
+        <Input
           name="niter"
           placeholder="iteraciones"
           onChange={handleInputs}
-          value={inputs["niter"]}
+          value={inputs.niter}
         />
-        <select name="error" onChange={handleInputs} value={inputs["error"]}>
+        <Select name="error" onChange={handleInputs} value={inputs["error"]}>
           <option value={0}>Error absoluto</option>
           <option value={1}>Error relativo</option>
-        </select>
+        </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
       {graph && <Function method={"Bisección"} expression={inputs["fun"]} />}

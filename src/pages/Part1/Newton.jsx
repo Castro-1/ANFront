@@ -2,15 +2,17 @@ import { useState } from "react";
 import Function from "./features/Function";
 import axios from "axios";
 import Button from "../../components/Button";
+import Input from "../../components/inputs/Input";
+import Select from "../../components/inputs/Select";
 
 export default function Newton() {
   const [inputs, setInputs] = useState({
     fun: "",
     dfun: "",
-    x: 0,
-    tol: 0.0,
-    niter: 0,
-    error: 0,
+    x: "",
+    tol: "",
+    niter: "",
+    error: "",
   });
   const [result, setResult] = useState(null);
   const [graph1, setGraph1] = useState(false);
@@ -20,8 +22,8 @@ export default function Newton() {
     let value = ev.target.value;
     if (ev.target.name === "fun") {
       setGraph1(false);
-    } else if (ev.target.name === "dfun"){
-      setGraph2(false)
+    } else if (ev.target.name === "dfun") {
+      setGraph2(false);
     }
     setInputs((prev) => {
       return { ...prev, [ev.target.name]: value };
@@ -30,12 +32,12 @@ export default function Newton() {
 
   const handleSubmit = async () => {
     let data = {
-      fun: inputs["fun"],
-      dfun: inputs["dfun"],
-      x: parseFloat(inputs["x"]),
-      tol: parseFloat(inputs["tol"]),
-      niter: parseInt(inputs["niter"]),
-      error: parseInt(inputs["error"]),
+      fun: inputs.fun,
+      dfun: inputs.dfun,
+      x: parseFloat(inputs.x),
+      tol: parseFloat(inputs.tol),
+      niter: parseInt(inputs.niter),
+      error: parseInt(inputs.error),
     };
 
     const response = await axios.post(
@@ -44,7 +46,7 @@ export default function Newton() {
     );
     setResult(response.data);
     setGraph1(true);
-    setGraph2(true)
+    setGraph2(true);
   };
 
   const ResultsTable = ({ found, x, f, df, e }) => {
@@ -78,48 +80,52 @@ export default function Newton() {
     <div>
       <h2>Newton</h2>
       <div>
-        <input
+        <Input
           placeholder="f(x)"
-          value={inputs["fun"]}
+          value={inputs.fun}
           onChange={handleInputs}
           name="fun"
         />
-        <input
+        <Input
           placeholder="g(x)"
-          value={inputs["dfun"]}
+          value={inputs.dfun}
           onChange={handleInputs}
           name="dfun"
         />
-        <Button onClick={() => {setGraph1(true); setGraph2(true)}}>Graficar</Button>
-        <input
-          type="number"
+        <Button
+          onClick={() => {
+            setGraph1(true);
+            setGraph2(true);
+          }}
+        >
+          Graficar
+        </Button>
+        <Input
           name="x"
           placeholder="x"
           onChange={handleInputs}
-          value={inputs["x"]}
+          value={inputs.x}
         />
-        <input
-          type="number"
+        <Input
           name="tol"
           placeholder="tolerancia"
           onChange={handleInputs}
-          value={inputs["tol"]}
+          value={inputs.tol}
         />
-        <input
-          type="number"
+        <Input
           name="niter"
           placeholder="iteraciones"
           onChange={handleInputs}
-          value={inputs["niter"]}
+          value={inputs.niter}
         />
-        <select name="error" onChange={handleInputs} value={inputs["error"]}>
+        <Select name="error" onChange={handleInputs} value={inputs.error}>
           <option value={0}>Error absoluto</option>
           <option value={1}>Error relativo</option>
-        </select>
+        </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
-      {graph1 && <Function method={"Newton f(x)"} expression={inputs["fun"]} />}
-      {graph2 && <Function method={"Newton g(x)"} expression={inputs["dfun"]} />}
+      {graph1 && <Function method={"Newton f(x)"} expression={inputs.fun} />}
+      {graph2 && <Function method={"Newton g(x)"} expression={inputs.dfun} />}
       {result !== null && <ResultsTable {...result} />}
     </div>
   );

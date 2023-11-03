@@ -2,16 +2,18 @@ import { useState } from "react";
 import Function from "./features/Function";
 import axios from "axios";
 import Button from "../../components/Button";
+import Input from "../../components/inputs/Input";
+import Select from "../../components/inputs/Select";
 
 export default function FixedPoint() {
   const [inputs, setInputs] = useState({
     fun: "",
     dfun: "",
-    a: 0,
-    b: 0,
-    tol: 0.0,
-    niter: 0,
-    error: 0,
+    a: "",
+    b: "",
+    tol: "",
+    niter: "",
+    error: "",
   });
   const [result, setResult] = useState(null);
   const [graph1, setGraph1] = useState(false);
@@ -21,8 +23,8 @@ export default function FixedPoint() {
     let value = ev.target.value;
     if (ev.target.name === "fun") {
       setGraph1(false);
-    } else if (ev.target.name === "dfun"){
-      setGraph2(false)
+    } else if (ev.target.name === "dfun") {
+      setGraph2(false);
     }
     setInputs((prev) => {
       return { ...prev, [ev.target.name]: value };
@@ -31,13 +33,13 @@ export default function FixedPoint() {
 
   const handleSubmit = async () => {
     let data = {
-      fun: inputs["fun"],
-      dfun: inputs["dfun"],
-      a: parseFloat(inputs["a"]),
-      b: parseFloat(inputs["b"]),
-      tol: parseFloat(inputs["tol"]),
-      niter: parseInt(inputs["niter"]),
-      error: parseInt(inputs["error"]),
+      fun: inputs.fun,
+      dfun: inputs.dfun,
+      a: parseFloat(inputs.a),
+      b: parseFloat(inputs.b),
+      tol: parseFloat(inputs.tol),
+      niter: parseInt(inputs.niter),
+      error: parseInt(inputs.error),
     };
 
     const response = await axios.post(
@@ -46,7 +48,7 @@ export default function FixedPoint() {
     );
     setResult(response.data);
     setGraph1(true);
-    setGraph2(true)
+    setGraph2(true);
   };
 
   const ResultsTable = ({ found, a, b, x, f, df, e }) => {
@@ -84,55 +86,62 @@ export default function FixedPoint() {
     <div>
       <h2>Punto Fijo</h2>
       <div>
-        <input
+        <Input
           placeholder="f(x)"
-          value={inputs["fun"]}
+          value={inputs.fun}
           onChange={handleInputs}
           name="fun"
         />
-        <input
+        <Input
           placeholder="g(x)"
-          value={inputs["dfun"]}
+          value={inputs.dfun}
           onChange={handleInputs}
           name="dfun"
         />
-        <Button onClick={() => {setGraph1(true); setGraph2(true)}}>Graficar</Button>
-        <input
-          type="number"
+        <Button
+          onClick={() => {
+            setGraph1(true);
+            setGraph2(true);
+          }}
+        >
+          Graficar
+        </Button>
+        <Input
           name="a"
           placeholder="a"
           onChange={handleInputs}
-          value={inputs["a"]}
+          value={inputs.a}
         />
-        <input
-          type="number"
+        <Input
           name="b"
           placeholder="b"
           onChange={handleInputs}
-          value={inputs["b"]}
+          value={inputs.b}
         />
-        <input
-          type="number"
+        <Input
           name="tol"
           placeholder="tolerancia"
           onChange={handleInputs}
-          value={inputs["tol"]}
+          value={inputs.tol}
         />
-        <input
-          type="number"
+        <Input
           name="niter"
           placeholder="iteraciones"
           onChange={handleInputs}
-          value={inputs["niter"]}
+          value={inputs.niter}
         />
-        <select name="error" onChange={handleInputs} value={inputs["error"]}>
+        <Select name="error" onChange={handleInputs} value={inputs.error}>
           <option value={0}>Error absoluto</option>
           <option value={1}>Error relativo</option>
-        </select>
+        </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
-      {graph1 && <Function method={"Punto Fijo f(x)"} expression={inputs["fun"]} />}
-      {graph2 && <Function method={"Punto Fijo g(x)"} expression={inputs["dfun"]} />}
+      {graph1 && (
+        <Function method={"Punto Fijo f(x)"} expression={inputs.fun} />
+      )}
+      {graph2 && (
+        <Function method={"Punto Fijo g(x)"} expression={inputs.dfun} />
+      )}
       {result !== null && <ResultsTable {...result} />}
     </div>
   );
