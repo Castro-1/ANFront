@@ -12,7 +12,7 @@ export default function Newton() {
     x: "",
     tol: "",
     niter: "",
-    error: "",
+    error: "0",
   });
   const [result, setResult] = useState(null);
   const [graph1, setGraph1] = useState(false);
@@ -33,7 +33,6 @@ export default function Newton() {
   const handleSubmit = async () => {
     let data = {
       fun: inputs.fun,
-      dfun: inputs.dfun,
       x: parseFloat(inputs.x),
       tol: parseFloat(inputs.tol),
       niter: parseInt(inputs.niter),
@@ -41,7 +40,7 @@ export default function Newton() {
     };
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/part1/biseccion/",
+      "http://127.0.0.1:8000/part1/newton/",
       data
     );
     setResult(response.data);

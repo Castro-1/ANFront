@@ -12,7 +12,7 @@ export default function Secant() {
     b: "",
     tol: "",
     niter: "",
-    error: "",
+    error: "0",
   });
   const [result, setResult] = useState(null);
   const [graph, setGraph] = useState(false);
@@ -36,6 +36,8 @@ export default function Secant() {
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),
     };
+
+    console.log(data);
 
     const response = await axios.post(
       "http://127.0.0.1:8000/part1/secante/",

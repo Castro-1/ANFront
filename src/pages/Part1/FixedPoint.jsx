@@ -9,11 +9,10 @@ export default function FixedPoint() {
   const [inputs, setInputs] = useState({
     fun: "",
     dfun: "",
-    a: "",
-    b: "",
+    x0: "",
     tol: "",
     niter: "",
-    error: "",
+    error: "0",
   });
   const [result, setResult] = useState(null);
   const [graph1, setGraph1] = useState(false);
@@ -35,15 +34,14 @@ export default function FixedPoint() {
     let data = {
       fun: inputs.fun,
       dfun: inputs.dfun,
-      a: parseFloat(inputs.a),
-      b: parseFloat(inputs.b),
+      x0: parseFloat(inputs.x0),
       tol: parseFloat(inputs.tol),
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),
     };
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/part1/biseccion/",
+      "http://127.0.0.1:8000/part1/puntofijo/",
       data
     );
     setResult(response.data);
@@ -51,15 +49,12 @@ export default function FixedPoint() {
     setGraph2(true);
   };
 
-  const ResultsTable = ({ found, a, b, x, f, df, e }) => {
-    const rows = a.map((value, i) => (
+  const ResultsTable = ({ found, x, f, e }) => {
+    const rows = x.map((value, i) => (
       <tr key={i} className="[&>*]:border-[0.1px]">
         <td>{i}</td>
-        <td>{a[i]}</td>
-        <td>{b[i]}</td>
         <td>{x[i]}</td>
         <td>{f[i]}</td>
-        <td>{df[i]}</td>
         <td>{e[i]}</td>
       </tr>
     ));
@@ -69,11 +64,8 @@ export default function FixedPoint() {
         <thead className="">
           <tr>
             <th className="m-5">Iteración</th>
-            <th>a</th>
-            <th>b</th>
             <th>x</th>
             <th>f(x)</th>
-            <th>g(x)</th>
             <th>error</th>
           </tr>
         </thead>
@@ -107,16 +99,10 @@ export default function FixedPoint() {
           Graficar
         </Button>
         <Input
-          name="a"
-          placeholder="a"
+          name="x0"
+          placeholder="x0"
           onChange={handleInputs}
-          value={inputs.a}
-        />
-        <Input
-          name="b"
-          placeholder="b"
-          onChange={handleInputs}
-          value={inputs.b}
+          value={inputs.x0}
         />
         <Input
           name="tol"
