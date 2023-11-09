@@ -9,7 +9,7 @@ export default function Newton() {
   const [inputs, setInputs] = useState({
     fun: "",
     dfun: "",
-    x: "",
+    x0: "",
     tol: "",
     niter: "",
     error: "0",
@@ -33,7 +33,7 @@ export default function Newton() {
   const handleSubmit = async () => {
     let data = {
       fun: inputs.fun,
-      x: parseFloat(inputs.x),
+      x0: parseFloat(inputs.x0),
       tol: parseFloat(inputs.tol),
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),
@@ -48,13 +48,12 @@ export default function Newton() {
     setGraph2(true);
   };
 
-  const ResultsTable = ({ found, x, f, df, e }) => {
-    const rows = a.map((value, i) => (
+  const ResultsTable = ({ found, x, f, e }) => {
+    const rows = x.map((value, i) => (
       <tr key={i} className="[&>*]:border-[0.1px]">
         <td>{i}</td>
         <td>{x[i]}</td>
         <td>{f[i]}</td>
-        <td>{df[i]}</td>
         <td>{e[i]}</td>
       </tr>
     ));
@@ -66,7 +65,6 @@ export default function Newton() {
             <th className="m-5">Iteración</th>
             <th>x</th>
             <th>f(x)</th>
-            <th>g(x)</th>
             <th>error</th>
           </tr>
         </thead>
@@ -86,7 +84,7 @@ export default function Newton() {
           name="fun"
         />
         <Input
-          placeholder="g(x)"
+          placeholder="f'(x)"
           value={inputs.dfun}
           onChange={handleInputs}
           name="dfun"
@@ -100,10 +98,10 @@ export default function Newton() {
           Graficar
         </Button>
         <Input
-          name="x"
-          placeholder="x"
+          name="x0"
+          placeholder="x0"
           onChange={handleInputs}
-          value={inputs.x}
+          value={inputs.x0}
         />
         <Input
           name="tol"
@@ -124,7 +122,7 @@ export default function Newton() {
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
       {graph1 && <Function method={"Newton f(x)"} expression={inputs.fun} />}
-      {graph2 && <Function method={"Newton g(x)"} expression={inputs.dfun} />}
+      {graph2 && <Function method={"Newton f'(x)"} expression={inputs.dfun} />}
       {result !== null && <ResultsTable {...result} />}
     </div>
   );

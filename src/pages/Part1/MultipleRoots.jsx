@@ -9,7 +9,8 @@ export default function Newton() {
   const [inputs, setInputs] = useState({
     fun: "",
     dfun: "",
-    x: "",
+    ddfun: "",
+    x0: "",
     tol: "",
     niter: "",
     error: "0",
@@ -17,6 +18,7 @@ export default function Newton() {
   const [result, setResult] = useState(null);
   const [graph1, setGraph1] = useState(false);
   const [graph2, setGraph2] = useState(false);
+  const [graph3, setGraph3] = useState(false);
 
   const handleInputs = (ev) => {
     let value = ev.target.value;
@@ -24,6 +26,8 @@ export default function Newton() {
       setGraph1(false);
     } else if (ev.target.name === "dfun") {
       setGraph2(false);
+    } else if (ev.target.name === "ddfun"){
+      setGraph3(false);
     }
     setInputs((prev) => {
       return { ...prev, [ev.target.name]: value };
@@ -33,7 +37,7 @@ export default function Newton() {
   const handleSubmit = async () => {
     let data = {
       fun: inputs.fun,
-      x: parseFloat(inputs.x),
+      x0: parseFloat(inputs.x0),
       tol: parseFloat(inputs.tol),
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),
@@ -46,15 +50,15 @@ export default function Newton() {
     setResult(response.data);
     setGraph1(true);
     setGraph2(true);
+    setGraph3(true);
   };
 
-  const ResultsTable = ({ found, x, f, df, e }) => {
-    const rows = a.map((value, i) => (
+  const ResultsTable = ({ found, x, f, e }) => {
+    const rows = x.map((value, i) => (
       <tr key={i} className="[&>*]:border-[0.1px]">
         <td>{i}</td>
         <td>{x[i]}</td>
         <td>{f[i]}</td>
-        <td>{df[i]}</td>
         <td>{e[i]}</td>
       </tr>
     ));
@@ -66,7 +70,6 @@ export default function Newton() {
             <th className="m-5">Iteración</th>
             <th>x</th>
             <th>f(x)</th>
-            <th>g(x)</th>
             <th>error</th>
           </tr>
         </thead>
@@ -86,24 +89,31 @@ export default function Newton() {
           name="fun"
         />
         <Input
-          placeholder="g(x)"
+          placeholder="f'(x)"
           value={inputs.dfun}
           onChange={handleInputs}
           name="dfun"
+        />
+        <Input
+          placeholder="f''(x)"
+          value={inputs.ddfun}
+          onChange={handleInputs}
+          name="ddfun"
         />
         <Button
           onClick={() => {
             setGraph1(true);
             setGraph2(true);
+            setGraph3(true);
           }}
         >
           Graficar
         </Button>
         <Input
-          name="x"
-          placeholder="x"
+          name="x0"
+          placeholder="x0"
           onChange={handleInputs}
-          value={inputs.x}
+          value={inputs.x0}
         />
         <Input
           name="tol"
@@ -123,8 +133,9 @@ export default function Newton() {
         </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
-      {graph1 && <Function method={"Multiple Root f(x)"} expression={inputs.fun} />}
-      {graph2 && <Function method={"Multiple Root g(x)"} expression={inputs.dfun} />}
+      {graph1 && <Function method={"Newton f(x)"} expression={inputs.fun} />}
+      {graph2 && <Function method={"Newton f'(x)"} expression={inputs.dfun} />}
+      {graph2 && <Function method={"Newton f''(x)"} expression={inputs.ddfun} />}
       {result !== null && <ResultsTable {...result} />}
     </div>
   );
