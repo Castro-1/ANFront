@@ -12,7 +12,7 @@ export default function FasleRule() {
     b: "",
     tol: "",
     niter: "",
-    error: "",
+    error: "0",
   });
   const [result, setResult] = useState(null);
   const [graph, setGraph] = useState(false);
@@ -36,21 +36,20 @@ export default function FasleRule() {
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),
     };
+    console.log(data);
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/part1/biseccion/",
+      "http://127.0.0.1:8000/part1/reglafalsa/",
       data
     );
     setResult(response.data);
     setGraph(true);
   };
 
-  const ResultsTable = ({ found, a, b, x, f, e }) => {
-    const rows = a.map((value, i) => (
+  const ResultsTable = ({ found, x, f, e }) => {
+    const rows = x.map((value, i) => (
       <tr key={i} className="[&>*]:border-[0.1px]">
         <td>{i}</td>
-        <td>{a[i]}</td>
-        <td>{b[i]}</td>
         <td>{x[i]}</td>
         <td>{f[i]}</td>
         <td>{e[i]}</td>
@@ -62,8 +61,6 @@ export default function FasleRule() {
         <thead className="">
           <tr>
             <th className="m-5">Iteración</th>
-            <th>a</th>
-            <th>b</th>
             <th>x</th>
             <th>f(x)</th>
             <th>error</th>
