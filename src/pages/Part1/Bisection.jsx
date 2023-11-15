@@ -42,16 +42,15 @@ export default function Bisection() {
       "http://127.0.0.1:8000/part1/biseccion/",
       data
     );
+    console.log(response.data);
     setResult(response.data);
     setGraph(true);
   };
 
-  const ResultsTable = ({ found, a, b, x, f, e }) => {
-    const rows = a.map((value, i) => (
+  const ResultsTable = ({ found, x, f, e }) => {
+    const rows = x.map((value, i) => (
       <tr key={i} className="[&>*]:border-[0.1px]">
         <td>{i}</td>
-        <td>{a[i]}</td>
-        <td>{b[i]}</td>
         <td>{x[i]}</td>
         <td>{f[i]}</td>
         <td>{e[i]}</td>
@@ -63,8 +62,6 @@ export default function Bisection() {
         <thead className="">
           <tr>
             <th className="m-5">Iteración</th>
-            <th>a</th>
-            <th>b</th>
             <th>x</th>
             <th>f(x)</th>
             <th>error</th>
@@ -110,13 +107,13 @@ export default function Bisection() {
           onChange={handleInputs}
           value={inputs.niter}
         />
-        <Select name="error" onChange={handleInputs} value={inputs["error"]}>
+        <Select name="error" onChange={handleInputs} value={inputs.error}>
           <option value={0}>Error absoluto</option>
           <option value={1}>Error relativo</option>
         </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
-      {graph && <Function method={"Bisección"} expression={inputs["fun"]} />}
+      {graph && <Function method={"Bisección"} expression={inputs.fun} />}
       {result !== null && <ResultsTable {...result} />}
     </div>
   );
