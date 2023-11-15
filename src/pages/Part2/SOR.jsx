@@ -35,15 +35,6 @@ export default function SOR() {
     });
   };
 
-  useEffect(() => {
-    setInputs((prev) => ({
-      ...prev,
-      A: initializeAValues(),
-      B: initializeBValues(),
-      X: initializeBValues(),
-    }));
-  }, [inputs.size]);
-
   const handleSubmit = async () => {
     let data = {
       A: formattedMatrix(inputs.A, inputs.size),
@@ -56,10 +47,7 @@ export default function SOR() {
     };
     console.log(data);
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/part2/sor/",
-      data
-    );
+    const response = await axios.post("http://127.0.0.1:8000/part2/sor/", data);
     console.log(response.data);
     setResults(response.data);
   };
@@ -126,7 +114,7 @@ export default function SOR() {
         </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
-      <DisplayResults results={results}/>
+      <DisplayResults results={results} />
     </div>
   );
 }

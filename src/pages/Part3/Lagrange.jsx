@@ -1,27 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 import { initializeXValues } from "./features/initializeValues";
+import { formattedMatrix } from "./features/formattedMatrix";
 import MatrixInputs from "./features/MatrixInputs";
 import Select from "../../components/inputs/Select";
 import Button from "../../components/Button";
+import DisplayResults from "./features/Results";
 
 export default function Lagrange() {
   const [inputs, setInputs] = useState({
     size: 2,
     x: initializeXValues(),
     y: initializeXValues(),
-  })
+  });
+  const [results, setResults] = useState(null);
 
   const handleSize = (ev) => {
     setInputs((prev) => ({ ...prev, size: ev.target.value }));
   };
-
-  useEffect(() => {
-    setInputs((prev) => ({
-      ...prev,
-      x: initializeXValues(),
-      y: initializeXValues(),
-    }));
-  }, [inputs.size]);
 
   const handleSubmit = async () => {
     let data = {
@@ -30,13 +26,11 @@ export default function Lagrange() {
     };
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/part2/lagrange/",
+      "http://127.0.0.1:8000/part3/lagrange/",
       data
     );
-    console.log(response.data);
     setResults(response.data);
   };
-
 
   return (
     <div>
@@ -67,8 +61,9 @@ export default function Lagrange() {
             setInputs={setInputs}
           />
         </div>
-        <Button onClick={handleSubmit}>Solucionar</Button>
+        <Button onClick={handleSubmit}>Interpolar</Button>
       </div>
+      <DisplayResults results={results} x={inputs.x} y={inputs.y} />
     </div>
   );
 }

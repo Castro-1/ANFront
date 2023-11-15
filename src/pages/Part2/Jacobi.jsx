@@ -34,15 +34,6 @@ export default function Jacobi() {
     });
   };
 
-  useEffect(() => {
-    setInputs((prev) => ({
-      ...prev,
-      A: initializeAValues(),
-      B: initializeBValues(),
-      X: initializeBValues(),
-    }));
-  }, [inputs.size]);
-
   const handleSubmit = async () => {
     let data = {
       A: formattedMatrix(inputs.A, inputs.size),
@@ -118,7 +109,7 @@ export default function Jacobi() {
         </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
-      <DisplayResults results={results}/>
+      <DisplayResults results={results} />
     </div>
   );
 }

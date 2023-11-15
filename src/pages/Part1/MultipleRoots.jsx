@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Function from "./features/Function";
+import Function from "../../components/Function";
 import axios from "axios";
 import Button from "../../components/Button";
 import Input from "../../components/inputs/Input";
@@ -26,7 +26,7 @@ export default function Newton() {
       setGraph1(false);
     } else if (ev.target.name === "dfun") {
       setGraph2(false);
-    } else if (ev.target.name === "ddfun"){
+    } else if (ev.target.name === "ddfun") {
       setGraph3(false);
     }
     setInputs((prev) => {
@@ -135,7 +135,9 @@ export default function Newton() {
       </div>
       {graph1 && <Function method={"Newton f(x)"} expression={inputs.fun} />}
       {graph2 && <Function method={"Newton f'(x)"} expression={inputs.dfun} />}
-      {graph2 && <Function method={"Newton f''(x)"} expression={inputs.ddfun} />}
+      {graph2 && (
+        <Function method={"Newton f''(x)"} expression={inputs.ddfun} />
+      )}
       {result !== null && <ResultsTable {...result} />}
     </div>
   );

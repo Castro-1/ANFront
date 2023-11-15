@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Function from "./features/Function";
+import Function from "../../components/Function";
 import axios from "axios";
 import Button from "../../components/Button";
 import Input from "../../components/inputs/Input";
