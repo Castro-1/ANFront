@@ -5,6 +5,7 @@ import {
   initializeBValues,
 } from "./features/initializeValues";
 import { formattedMatrix } from "./features/formattedMatrix";
+import DisplayResults from "./features/Results";
 import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
 import Button from "../../components/Button";
@@ -20,6 +21,7 @@ export default function GaussSeidel() {
     niter: "",
     error: "0",
   });
+  const [results, setResults] = useState(null);
 
   const handleSize = (ev) => {
     setInputs((prev) => ({ ...prev, size: ev.target.value }));
@@ -57,6 +59,7 @@ export default function GaussSeidel() {
       data
     );
     console.log(response.data);
+    setResults(response.data);
   };
 
   return (
@@ -115,6 +118,7 @@ export default function GaussSeidel() {
         </Select>
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
+      <DisplayResults results={results}/>
     </div>
   );
 }
