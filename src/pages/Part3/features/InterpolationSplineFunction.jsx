@@ -9,6 +9,7 @@ import {
   Title,
 } from "chart.js";
 import * as math from "mathjs";
+import functionColors from "./colors";
 
 Chart.register(
   CategoryScale,
@@ -19,10 +20,10 @@ Chart.register(
   Title
 );
 
-export default function InterpolationFunction({
-  expression,
+export default function InterpolationSplineFunction({
+  expressions,
   method,
-  color = "#646cff",
+  colors = functionColors,
   xValues,
   yValues,
 }) {
@@ -40,28 +41,30 @@ export default function InterpolationFunction({
   };
 
   useEffect(() => {
-    if (!expression) {
-      alert("Please enter a function.");
+    if (!expressions || expressions.length === 0) {
+      alert("Please enter at least one function.");
       return;
     }
 
     let minX = Math.min(...xValues);
     let maxX = Math.max(...xValues);
     let minY = Math.min(...yValues);
-    let maxY = Math.max(...yValues);
+    let maxY = math.max(...yValues);
 
-    const step = (maxX - minX) / 100; // Adjust step based on the range of xValues
+    let step = (maxX - minX) / 100; // Adjust step based on the range of xValues
+    const datasets = expressions.map((expression, index) => {
+      const color = colors[index % colors.length];
+      return {
+        label: expression,
+        data: parseFunction(expression, minX, maxX, step),
+        borderColor: color,
+        pointRadius: pointRadiusArray.current,
+      };
+    });
 
     const data = {
       labels: math.range(minX, maxX, step).toArray(),
-      datasets: [
-        {
-          label: expression,
-          data: parseFunction(expression, minX, maxX, step),
-          borderColor: color,
-          pointRadius: pointRadiusArray.current,
-        },
-      ],
+      datasets: datasets,
     };
 
     if (xValues && yValues && xValues.length === yValues.length) {
@@ -122,7 +125,7 @@ export default function InterpolationFunction({
       });
       chartInstance.current = chart;
     }
-  }, [expression, method, xValues, yValues]);
+  }, [expressions, method, xValues, yValues, colors]);
 
   return (
     <div>

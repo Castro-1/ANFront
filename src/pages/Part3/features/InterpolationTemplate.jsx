@@ -44,6 +44,7 @@ export default function InterpolationTempalte({
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
       <DisplayResults
+        name={name}
         results={results}
         x={formattedMatrix(inputs.x, inputs.size)}
         y={formattedMatrix(inputs.y, inputs.size)}
