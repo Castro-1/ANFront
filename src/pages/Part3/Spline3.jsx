@@ -4,7 +4,7 @@ import { initializeXValues } from "./features/initializeValues";
 import { formattedMatrix } from "./features/formattedMatrix";
 import InterpolationTempalte from "./features/InterpolationTemplate";
 
-export default function Vandermonde() {
+export default function Spline3() {
   const [inputs, setInputs] = useState({
     size: 2,
     x: initializeXValues(),
@@ -23,7 +23,7 @@ export default function Vandermonde() {
     };
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/part3/vandermonde/",
+      "http://127.0.0.1:8000/part3/spline3/",
       data
     );
     console.log(response.data);
@@ -32,7 +32,7 @@ export default function Vandermonde() {
 
   return (
     <InterpolationTempalte
-      name={"Vandermonde"}
+      name={"Spline Cúbico"}
       inputs={inputs}
       results={results}
       setInputs={setInputs}

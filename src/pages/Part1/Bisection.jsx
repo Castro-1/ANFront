@@ -58,17 +58,24 @@ export default function Bisection() {
     ));
 
     return (
-      <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
-        <thead className="">
-          <tr>
-            <th className="m-5">Iteración</th>
-            <th>x</th>
-            <th>f(x)</th>
-            <th>error</th>
-          </tr>
-        </thead>
-        <tbody className="[&>*]:border-[0.1px]">{rows}</tbody>
-      </table>
+      <div>
+        <p>
+          {found === 1
+            ? `El método converge después de ${x.length} iteraciones.`
+            : `El método no converge después de ${x.lenght} iteraciones.`}
+        </p>
+        <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
+          <thead className="">
+            <tr>
+              <th className="m-5">Iteración</th>
+              <th>x</th>
+              <th>f(x)</th>
+              <th>error</th>
+            </tr>
+          </thead>
+          <tbody className="[&>*]:border-[0.1px]">{rows}</tbody>
+        </table>
+      </div>
     );
   };
 

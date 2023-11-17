@@ -2,10 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { initializeXValues } from "./features/initializeValues";
 import { formattedMatrix } from "./features/formattedMatrix";
-import MatrixInputs from "./features/MatrixInputs";
-import Select from "../../components/inputs/Select";
-import Button from "../../components/Button";
-import DisplayResults from "./features/Results";
+import InterpolationTempalte from "./features/InterpolationTemplate";
 
 export default function Lagrange() {
   const [inputs, setInputs] = useState({
@@ -29,41 +26,18 @@ export default function Lagrange() {
       "http://127.0.0.1:8000/part3/lagrange/",
       data
     );
+    console.log(response.data);
     setResults(response.data);
   };
 
   return (
-    <div>
-      <h2>Lagrange</h2>
-      <div>
-        <Select value={inputs.size} onChange={handleSize}>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-        </Select>
-        <div>
-          <p>x</p>
-          <MatrixInputs
-            type="x"
-            inputs={inputs.x}
-            size={inputs.size}
-            setInputs={setInputs}
-          />
-        </div>
-        <div>
-          <p>y</p>
-          <MatrixInputs
-            type="y"
-            inputs={inputs.y}
-            size={inputs.size}
-            setInputs={setInputs}
-          />
-        </div>
-        <Button onClick={handleSubmit}>Interpolar</Button>
-      </div>
-      <DisplayResults results={results} x={inputs.x} y={inputs.y} />
-    </div>
+    <InterpolationTempalte
+      name={"Lagrange"}
+      inputs={inputs}
+      results={results}
+      setInputs={setInputs}
+      handleSize={handleSize}
+      handleSubmit={handleSubmit}
+    />
   );
 }

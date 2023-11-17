@@ -30,13 +30,16 @@ export default function Home() {
         <Button onClick={() => navigate("parte2/sor")}>SOR</Button>
       </div>
       <div>
-        <h3>Parte 2</h3>
+        <h3>Parte 3</h3>
         <Button onClick={() => navigate("parte3/lagrange")}>Lagrange</Button>
         <Button onClick={() => navigate("parte3/newton")}>Newton</Button>
         <Button onClick={() => navigate("parte3/vandermonde")}>
           Vandermonde
         </Button>
         <Button onClick={() => navigate("parte3/spline")}>Spline</Button>
+        <Button onClick={() => navigate("parte3/spline3")}>
+          Spline Cúbico
+        </Button>
       </div>
     </div>
   );

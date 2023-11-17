@@ -4,6 +4,7 @@ import axios from "axios";
 import Button from "../../components/Button";
 import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
+import Results from "./features/Results";
 
 export default function Newton() {
   const [inputs, setInputs] = useState({
@@ -46,31 +47,6 @@ export default function Newton() {
     setResult(response.data);
     setGraph1(true);
     setGraph2(true);
-  };
-
-  const ResultsTable = ({ found, x, f, e }) => {
-    const rows = x.map((value, i) => (
-      <tr key={i} className="[&>*]:border-[0.1px]">
-        <td>{i}</td>
-        <td>{x[i]}</td>
-        <td>{f[i]}</td>
-        <td>{e[i]}</td>
-      </tr>
-    ));
-
-    return (
-      <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
-        <thead className="">
-          <tr>
-            <th className="m-5">Iteración</th>
-            <th>x</th>
-            <th>f(x)</th>
-            <th>error</th>
-          </tr>
-        </thead>
-        <tbody className="[&>*]:border-[0.1px]">{rows}</tbody>
-      </table>
-    );
   };
 
   return (
@@ -123,7 +99,7 @@ export default function Newton() {
       </div>
       {graph1 && <Function method={"Newton f(x)"} expression={inputs.fun} />}
       {graph2 && <Function method={"Newton f'(x)"} expression={inputs.dfun} />}
-      {result !== null && <ResultsTable {...result} />}
+      {result !== null && <Results {...result} />}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import axios from "axios";
 import Button from "../../components/Button";
 import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
+import Results from "./features/Results";
 
 export default function FasleRule() {
   const [inputs, setInputs] = useState({
@@ -44,31 +45,6 @@ export default function FasleRule() {
     );
     setResult(response.data);
     setGraph(true);
-  };
-
-  const ResultsTable = ({ found, x, f, e }) => {
-    const rows = x.map((value, i) => (
-      <tr key={i} className="[&>*]:border-[0.1px]">
-        <td>{i}</td>
-        <td>{x[i]}</td>
-        <td>{f[i]}</td>
-        <td>{e[i]}</td>
-      </tr>
-    ));
-
-    return (
-      <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
-        <thead className="">
-          <tr>
-            <th className="m-5">Iteración</th>
-            <th>x</th>
-            <th>f(x)</th>
-            <th>error</th>
-          </tr>
-        </thead>
-        <tbody className="[&>*]:border-[0.1px]">{rows}</tbody>
-      </table>
-    );
   };
 
   return (
@@ -113,7 +89,7 @@ export default function FasleRule() {
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
       {graph && <Function method={"Regla Falsa"} expression={inputs.fun} />}
-      {result !== null && <ResultsTable {...result} />}
+      {result !== null && <Results {...result} />}
     </div>
   );
 }

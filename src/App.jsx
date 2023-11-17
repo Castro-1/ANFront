@@ -15,6 +15,7 @@ import FasleRule from "./pages/Part1/FalseRule";
 import Vandermonde from "./pages/Part3/Vandermonde";
 import GaussSeidel from "./pages/Part2/GaussSeidel";
 import MultipleRoots from "./pages/Part1/MultipleRoots";
+import Spline3 from "./pages/Part3/Spline3";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="parte3/lagrange" element={<Lagrange />} />
         <Route path="parte3/newton" element={<Newton2 />} />
         <Route path="parte3/spline" element={<Spline />} />
+        <Route path="parte3/spline3" element={<Spline3 />} />
         <Route path="parte3/vandermonde" element={<Vandermonde />} />
       </Route>
 

@@ -41,6 +41,11 @@ const Process = ({ x }) => {
 const DisplayResults = ({ results }) => {
   return results ? (
     <div>
+      <p>
+        {results.convergence === 0
+          ? `El método no converge después de ${results.x.length} iteraciones.`
+          : `El método converge después de ${results.x.length} iteraciones.`}
+      </p>
       <Radius radio={results.radio} />
       {results.radio > 1 ? (
         "El método no converge porque el radio espectral es mayor o igual a 1."
