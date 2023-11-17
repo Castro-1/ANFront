@@ -4,6 +4,8 @@ import axios from "axios";
 import Button from "../../components/Button";
 import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
+import Results from "./features/Results";
+import url from "../../assets/url";
 
 export default function Bisection() {
   const [inputs, setInputs] = useState({
@@ -38,45 +40,10 @@ export default function Bisection() {
     };
     console.log(data);
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/part1/biseccion/",
-      data
-    );
+    const response = await axios.post(`${url}/part1/biseccion/`, data);
     console.log(response.data);
     setResult(response.data);
     setGraph(true);
-  };
-
-  const ResultsTable = ({ found, x, f, e }) => {
-    const rows = x.map((value, i) => (
-      <tr key={i} className="[&>*]:border-[0.1px]">
-        <td>{i}</td>
-        <td>{x[i]}</td>
-        <td>{f[i]}</td>
-        <td>{e[i]}</td>
-      </tr>
-    ));
-
-    return (
-      <div>
-        <p>
-          {found === 1
-            ? `El método converge después de ${x.length} iteraciones.`
-            : `El método no converge después de ${x.lenght} iteraciones.`}
-        </p>
-        <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
-          <thead className="">
-            <tr>
-              <th className="m-5">Iteración</th>
-              <th>x</th>
-              <th>f(x)</th>
-              <th>error</th>
-            </tr>
-          </thead>
-          <tbody className="[&>*]:border-[0.1px]">{rows}</tbody>
-        </table>
-      </div>
-    );
   };
 
   return (
@@ -121,7 +88,7 @@ export default function Bisection() {
         <Button onClick={handleSubmit}>Solucionar</Button>
       </div>
       {graph && <Function method={"Bisección"} expression={inputs.fun} />}
-      {result !== null && <ResultsTable {...result} />}
+      {result !== null && <Results {...result} />}
     </div>
   );
 }

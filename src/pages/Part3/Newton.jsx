@@ -22,10 +22,7 @@ export default function Newton2() {
       y: formattedMatrix(inputs.y, inputs.size),
     };
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/part3/newton/",
-      data
-    );
+    const response = await axios.post(`${url}/part3/newton/`, data);
     console.log(response.data);
     setResults(response.data);
   };

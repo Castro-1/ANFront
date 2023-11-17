@@ -3,6 +3,7 @@ import axios from "axios";
 import { initializeXValues } from "./features/initializeValues";
 import { formattedMatrix } from "./features/formattedMatrix";
 import InterpolationTempalte from "./features/InterpolationTemplate";
+import url from "../../assets/url";
 
 export default function Spline3() {
   const [inputs, setInputs] = useState({
@@ -22,10 +23,7 @@ export default function Spline3() {
       y: formattedMatrix(inputs.y, inputs.size),
     };
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/part3/spline3/",
-      data
-    );
+    const response = await axios.post(`${url}/part3/spline3/`, data);
     console.log(response.data);
     setResults(response.data);
   };

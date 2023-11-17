@@ -10,6 +10,7 @@ import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
 import Button from "../../components/Button";
 import MatrixInputs from "./features/MatrixInputs";
+import url from "../../assets/url";
 
 export default function SOR() {
   const [inputs, setInputs] = useState({
@@ -48,7 +49,7 @@ export default function SOR() {
       error: parseInt(inputs.error),
     };
 
-    const response = await axios.post("http://127.0.0.1:8000/part2/sor/", data);
+    const response = await axios.post(`${url}/part2/sor/`, data);
     console.log(response.data);
     setResults(response.data);
   };

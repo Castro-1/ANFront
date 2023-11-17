@@ -3,6 +3,7 @@ import axios from "axios";
 import { initializeXValues } from "./features/initializeValues";
 import { formattedMatrix } from "./features/formattedMatrix";
 import InterpolationTempalte from "./features/InterpolationTemplate";
+import url from "../../assets/url";
 
 export default function Lagrange() {
   const [inputs, setInputs] = useState({
@@ -22,10 +23,7 @@ export default function Lagrange() {
       y: formattedMatrix(inputs.y, inputs.size),
     };
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/part3/lagrange/",
-      data
-    );
+    const response = await axios.post(`${url}/part3/lagrange/`, data);
     console.log(response.data);
     setResults(response.data);
   };

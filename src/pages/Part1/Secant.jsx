@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
 import Results from "./features/Results";
+import url from "../../assets/url";
 
 export default function Secant() {
   const [inputs, setInputs] = useState({
@@ -40,10 +41,7 @@ export default function Secant() {
 
     console.log(data);
 
-    const response = await axios.post(
-      "http://127.0.0.1:8000/part1/secante/",
-      data
-    );
+    const response = await axios.post(`${url}/part1/secante/`, data);
     setResult(response.data);
     setGraph(true);
   };
