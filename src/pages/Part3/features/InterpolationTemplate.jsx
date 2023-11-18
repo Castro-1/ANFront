@@ -18,13 +18,16 @@ export default function InterpolationTempalte({
     <div>
       <h2>{name}</h2>
       <div>
-        <Select value={inputs.size} onChange={handleSize}>
-          {!cubic && <option value={2}>2</option>}
-          {!cubic && <option value={3}>3</option>}
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-        </Select>
+        <div className="text-left">
+          <p>Tamaño</p>
+          <Select value={inputs.size} onChange={handleSize}>
+            {!cubic && <option value={2}>2</option>}
+            {!cubic && <option value={3}>3</option>}
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+          </Select>
+        </div>
         <div>
           <p>x</p>
           <MatrixInputs

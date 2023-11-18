@@ -37,10 +37,6 @@ export default function checkData(data) {
           }
         }
       }
-    } else if (isNaN(data[key]) && data[key] !== 0) {
-      goodData.is = false;
-      goodData.message = `ingresar número para ${inputsDict[key]}.`;
-      return goodData;
     } else if (key === "fun" || key === "dfun" || key === "ddfun") {
       if (!checkFunction(data[key])) {
         goodData.is = false;
@@ -56,6 +52,10 @@ export default function checkData(data) {
         ];
         return goodData;
       }
+    } else if (isNaN(data[key]) && data[key] !== 0) {
+      goodData.is = false;
+      goodData.message = `ingresar número para ${inputsDict[key]}.`;
+      return goodData;
     }
   }
   return goodData;

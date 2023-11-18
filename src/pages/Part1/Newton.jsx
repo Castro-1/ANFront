@@ -123,7 +123,9 @@ export default function Newton() {
             <option value={1}>Relativo</option>
           </Select>
         </div>
-        <Button onClick={handleSubmit}>Solucionar</Button>
+        <div className="text-center">
+          <Button onClick={handleSubmit}>Solucionar</Button>
+        </div>
       </div>
       {error && <p>{error}</p>}
       {suggestions && (
