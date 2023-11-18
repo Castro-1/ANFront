@@ -6,6 +6,7 @@ import Input from "../../components/inputs/Input";
 import Select from "../../components/inputs/Select";
 import Results from "./features/Results";
 import url from "../../assets/url";
+import checkData from "../../components/checkData";
 
 export default function Bisection() {
   const [inputs, setInputs] = useState({
@@ -18,6 +19,7 @@ export default function Bisection() {
   });
   const [result, setResult] = useState(null);
   const [graph, setGraph] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleInputs = (ev) => {
     let value = ev.target.value;
@@ -38,12 +40,16 @@ export default function Bisection() {
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),
     };
-    console.log(data);
-
-    const response = await axios.post(`${url}/part1/biseccion/`, data);
-    console.log(response.data);
-    setResult(response.data);
-    setGraph(true);
+    const validateData = checkData(data);
+    if (validateData.is) {
+      const response = await axios.post(`${url}/part1/biseccion/`, data);
+      console.log(response.data);
+      setResult(response.data);
+      setGraph(true);
+      setError(null);
+    } else {
+      setError(validateData.message);
+    }
   };
 
   return (
@@ -89,6 +95,7 @@ export default function Bisection() {
       </div>
       {graph && <Function method={"Bisección"} expression={inputs.fun} />}
       {result !== null && <Results {...result} />}
+      {error && <p>{error}</p>}
     </div>
   );
 }
