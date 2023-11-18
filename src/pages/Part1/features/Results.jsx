@@ -13,9 +13,9 @@ const Results = ({ found, x, f, e }) => {
       <p>
         {found === 1
           ? `El método converge después de ${x.length} iteraciones.`
-          : `El método no converge después de ${x.lenght} iteraciones.`}
+          : `El método no converge después de ${x.length} iteraciones.`}
       </p>
-      <table className="border-[0.1px] border-white [&>*]:border-[0.1px]">
+      <table className="m-auto border-[0.1px] border-white [&>*]:border-[0.1px]">
         <thead className="">
           <tr>
             <th className="m-5">Iteración</th>

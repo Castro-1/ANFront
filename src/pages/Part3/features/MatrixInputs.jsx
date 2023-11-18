@@ -1,12 +1,19 @@
 import SmallInput from "../../../components/inputs/SmallInput";
 
-export default function MatrixInputs({type, inputs, size, setInputs }) {
+export default function MatrixInputs({
+  type,
+  inputs,
+  size,
+  setInputs,
+  setResults,
+}) {
   const handleInputs = (matrix, i, value) => {
     setInputs((prev) => {
       let tmp = prev[matrix];
-        tmp[i] = value;
+      tmp[i] = value;
       return { ...prev, [matrix]: prev[matrix] };
     });
+    setResults(null);
   };
 
   const generateXInputs = () => {

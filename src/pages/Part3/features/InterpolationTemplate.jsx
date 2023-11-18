@@ -11,14 +11,16 @@ export default function InterpolationTempalte({
   setInputs,
   handleSize,
   handleSubmit,
+  setResults,
 }) {
+  const cubic = name === "Spline Cúbico";
   return (
     <div>
       <h2>{name}</h2>
       <div>
         <Select value={inputs.size} onChange={handleSize}>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
+          {!cubic && <option value={2}>2</option>}
+          {!cubic && <option value={3}>3</option>}
           <option value={4}>4</option>
           <option value={5}>5</option>
           <option value={6}>6</option>
@@ -30,6 +32,7 @@ export default function InterpolationTempalte({
             inputs={inputs.x}
             size={inputs.size}
             setInputs={setInputs}
+            setResults={setResults}
           />
         </div>
         <div>
@@ -39,6 +42,7 @@ export default function InterpolationTempalte({
             inputs={inputs.y}
             size={inputs.size}
             setInputs={setInputs}
+            setResults={setResults}
           />
         </div>
         <Button onClick={handleSubmit}>Solucionar</Button>

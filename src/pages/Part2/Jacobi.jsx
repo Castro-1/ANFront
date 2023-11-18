@@ -11,6 +11,7 @@ import Select from "../../components/inputs/Select";
 import Button from "../../components/Button";
 import MatrixInputs from "./features/MatrixInputs";
 import url from "../../assets/url";
+import checkData from "../../components/checkData";
 
 export default function Jacobi() {
   const [inputs, setInputs] = useState({
@@ -24,6 +25,7 @@ export default function Jacobi() {
     error: "0",
   });
   const [results, setResults] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleInputs = (ev) => {
     let value = ev.target.value;
@@ -43,8 +45,21 @@ export default function Jacobi() {
       error: parseInt(inputs.error),
     };
 
-    const response = await axios.post(`${url}/part2/jacobi/`, data);
-    setResults(response.data);
+    const validateData = checkData(data);
+    if (validateData.is) {
+      const response = await axios.post(`${url}/part2/jacobi/`, data);
+      console.log(response.data);
+      if (response.data.error) {
+        setError(response.data.error);
+        setResults(null);
+      } else {
+        setResults(response.data);
+        setError(null);
+      }
+    } else {
+      setError(validateData.message);
+      setResults(null);
+    }
   };
 
   return (
@@ -126,6 +141,7 @@ export default function Jacobi() {
           <Button onClick={handleSubmit}>Solucionar</Button>
         </div>
       </div>
+      {error && <p>{error}</p>}
       <DisplayResults results={results} />
     </div>
   );
