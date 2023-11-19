@@ -48,6 +48,7 @@ export default function Bisection() {
       console.log(response.data);
       if (response.data.error) {
         setError(response.data.error);
+        setGraph(false);
         setResult(null);
       } else {
         setResult(response.data);
@@ -58,6 +59,7 @@ export default function Bisection() {
     } else {
       setError(validateData.message);
       setResult(null);
+      setGraph(false);
       if (validateData.suggestions) {
         setSuggestions(validateData.suggestions);
       }
@@ -132,14 +134,7 @@ export default function Bisection() {
           ))}
         </ul>
       )}
-      {graph && (
-        <Function
-          method={"Bisección"}
-          expression={inputs.fun}
-          minX={inputs.a}
-          maxX={inputs.b}
-        />
-      )}
+      {graph && <Function method={"Bisección"} expression={inputs.fun} />}
       {result !== null && <Results {...result} />}
     </div>
   );

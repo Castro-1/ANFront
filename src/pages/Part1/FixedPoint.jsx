@@ -53,6 +53,8 @@ export default function FixedPoint() {
       if (response.data.error) {
         setError(response.data.error);
         setResult(null);
+        setGraph1(false);
+        setGraph2(false);
       } else {
         setResult(response.data);
         setGraph1(true);
@@ -63,6 +65,8 @@ export default function FixedPoint() {
     } else {
       setError(validateData.message);
       setResult(null);
+      setGraph1(false);
+      setGraph2(false);
       if (validateData.suggestions) {
         setSuggestions(validateData.suggestions);
       }
@@ -76,7 +80,7 @@ export default function FixedPoint() {
         <div>
           <p>Función</p>
           <Input
-            placeholder="x^3 - 2x - 5"
+            placeholder="x-x^2"
             value={inputs.fun}
             onChange={handleInputs}
             name="fun"
@@ -85,7 +89,7 @@ export default function FixedPoint() {
         <div>
           <p>g(x)</p>
           <Input
-            placeholder="(x^3 - 5) / 2"
+            placeholder="x^2"
             value={inputs.dfun}
             onChange={handleInputs}
             name="dfun"
@@ -95,7 +99,7 @@ export default function FixedPoint() {
           <p>x0</p>
           <Input
             name="x0"
-            placeholder="2"
+            placeholder="0.5"
             onChange={handleInputs}
             value={inputs.x0}
           />

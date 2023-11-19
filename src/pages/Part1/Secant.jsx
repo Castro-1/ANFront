@@ -50,6 +50,7 @@ export default function Secant() {
       if (response.data.error) {
         setError(response.data.error);
         setResult(null);
+        setGraph(false);
       } else {
         setResult(response.data);
         setGraph(true);
@@ -59,6 +60,7 @@ export default function Secant() {
     } else {
       setError(validateData.message);
       setResult(null);
+      setGraph(false);
       if (validateData.suggestions) {
         setSuggestions(validateData.suggestions);
       }

@@ -56,6 +56,9 @@ export default function Newton() {
       if (response.data.error) {
         setError(response.data.error);
         setResult(null);
+        setGraph1(false);
+        setGraph2(false);
+        setGraph3(false);
       } else {
         setResult(response.data);
         setGraph1(true);
@@ -67,6 +70,9 @@ export default function Newton() {
     } else {
       setError(validateData.message);
       setResult(null);
+      setGraph1(false);
+      setGraph2(false);
+      setGraph3(false);
       if (validateData.suggestions) {
         setSuggestions(validateData.suggestions);
       }
