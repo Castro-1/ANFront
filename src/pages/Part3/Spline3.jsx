@@ -34,6 +34,9 @@ export default function Spline3() {
       if (response.data.error) {
         setError(response.data.error);
         setResults(null);
+      } else if (response.data.includes("oo") || response.data === "nan") {
+        setError("Valores repetidos en x");
+        setResults(null);
       } else {
         setResults(response.data);
         setError(null);
