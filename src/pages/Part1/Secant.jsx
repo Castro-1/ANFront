@@ -7,6 +7,7 @@ import Select from "../../components/inputs/Select";
 import Results from "./features/Results";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function Secant() {
   const [inputs, setInputs] = useState({
@@ -66,8 +67,8 @@ export default function Secant() {
 
   return (
     <div>
-      <h2>Secant</h2>
-      <div className="text-center">
+      <Title>Secante</Title>
+      <div className="text-left">
         <div>
           <p>Función</p>
           <Input

@@ -7,6 +7,7 @@ import Select from "../../components/inputs/Select";
 import Results from "./features/Results";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function FasleRule() {
   const [inputs, setInputs] = useState({
@@ -67,7 +68,7 @@ export default function FasleRule() {
 
   return (
     <div>
-      <h2>Regla Falsa</h2>
+      <Title>Regla Falsa</Title>
       <div className="text-left">
         <div>
           <p>Función</p>

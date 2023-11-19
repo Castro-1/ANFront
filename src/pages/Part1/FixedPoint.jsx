@@ -7,6 +7,7 @@ import Select from "../../components/inputs/Select";
 import Results from "./features/Results";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function FixedPoint() {
   const [inputs, setInputs] = useState({
@@ -70,7 +71,7 @@ export default function FixedPoint() {
 
   return (
     <div>
-      <h2>Punto Fijo</h2>
+      <Title>Punto Fijo</Title>
       <div className="text-left">
         <div>
           <p>Función</p>

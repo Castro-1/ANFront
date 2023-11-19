@@ -12,6 +12,7 @@ import Button from "../../components/Button";
 import MatrixInputs from "./features/MatrixInputs";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function Jacobi() {
   const [inputs, setInputs] = useState({
@@ -64,7 +65,7 @@ export default function Jacobi() {
 
   return (
     <div>
-      <h2>Jacobi</h2>
+      <Title>Jacobi</Title>
       <div className="text-left">
         <div>
           <p>Tamaño</p>

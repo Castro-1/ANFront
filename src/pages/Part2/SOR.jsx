@@ -12,6 +12,7 @@ import Button from "../../components/Button";
 import MatrixInputs from "./features/MatrixInputs";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function SOR() {
   const [inputs, setInputs] = useState({
@@ -70,7 +71,7 @@ export default function SOR() {
 
   return (
     <div>
-      <h2>SOR</h2>
+      <Title>SOR</Title>
       <div className="text-left">
         <div>
           <p>Tamaño</p>

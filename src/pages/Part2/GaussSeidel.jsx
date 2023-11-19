@@ -12,6 +12,7 @@ import Button from "../../components/Button";
 import MatrixInputs from "./features/MatrixInputs";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function GaussSeidel() {
   const [inputs, setInputs] = useState({
@@ -65,7 +66,7 @@ export default function GaussSeidel() {
 
   return (
     <div>
-      <h2>Gauss Seidel</h2>
+      <Title>Gauss-Seidel</Title>
       <div className="text-left">
         <div>
           <p>Tamaño</p>

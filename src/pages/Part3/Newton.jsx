@@ -4,6 +4,7 @@ import { initializeXValues } from "./features/initializeValues";
 import { formattedMatrix } from "./features/formattedMatrix";
 import InterpolationTempalte from "./features/InterpolationTemplate";
 import checkData from "../../components/checkData";
+import url from "../../assets/url";
 
 export default function Newton2() {
   const [inputs, setInputs] = useState({

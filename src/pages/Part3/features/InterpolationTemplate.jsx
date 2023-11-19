@@ -1,4 +1,5 @@
 import Button from "../../../components/Button";
+import { Title } from "../../../components/Title";
 import Select from "../../../components/inputs/Select";
 import MatrixInputs from "./MatrixInputs";
 import DisplayResults from "./Results";
@@ -16,7 +17,7 @@ export default function InterpolationTempalte({
   const cubic = name === "Spline Cúbico";
   return (
     <div>
-      <h2>{name}</h2>
+      <Title>{name}</Title>
       <div>
         <div className="text-left">
           <p>Tamaño</p>

@@ -7,6 +7,7 @@ import Select from "../../components/inputs/Select";
 import Results from "./features/Results";
 import url from "../../assets/url";
 import checkData from "../../components/checkData";
+import { Title } from "../../components/Title";
 
 export default function Bisection() {
   const [inputs, setInputs] = useState({
@@ -65,7 +66,7 @@ export default function Bisection() {
 
   return (
     <div>
-      <h2>Bisección</h2>
+      <Title>Bisección</Title>
       <div className="text-left">
         <div>
           <p>Función</p>
@@ -131,7 +132,14 @@ export default function Bisection() {
           ))}
         </ul>
       )}
-      {graph && <Function method={"Bisección"} expression={inputs.fun} />}
+      {graph && (
+        <Function
+          method={"Bisección"}
+          expression={inputs.fun}
+          minX={inputs.a}
+          maxX={inputs.b}
+        />
+      )}
       {result !== null && <Results {...result} />}
     </div>
   );

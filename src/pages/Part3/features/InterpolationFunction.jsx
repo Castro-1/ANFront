@@ -90,14 +90,14 @@ export default function InterpolationFunction({
             x: {
               type: "linear",
               position: "bottom",
-              min: minX,
-              max: maxX,
+              min: minX - maxX / 2,
+              max: maxX + maxX / 2,
             },
             y: {
               type: "linear",
               position: "left",
-              min: minY,
-              max: maxY,
+              min: minY - maxY / 2,
+              max: maxY + maxY / 2,
             },
           },
           plugins: {
