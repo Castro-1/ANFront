@@ -40,7 +40,7 @@ export default function Jacobi() {
       A: formattedMatrix(inputs.A, inputs.size),
       b: formattedMatrix(inputs.B, inputs.size),
       x0: formattedMatrix(inputs.X, inputs.size),
-      // norm,
+      norm: inputs.norm,
       tol: parseFloat(inputs.tol),
       niter: parseInt(inputs.niter),
       error: parseInt(inputs.error),

@@ -52,7 +52,8 @@ export default function checkData(data) {
         ];
         return goodData;
       }
-    } else if (isNaN(data[key]) && data[key] !== 0) {
+    } else if (key !== "norm" && isNaN(data[key]) && data[key] !== 0) {
+      console.log(key);
       goodData.is = false;
       goodData.message = `ingresar número para ${inputsDict[key]}.`;
       return goodData;

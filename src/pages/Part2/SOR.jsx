@@ -45,7 +45,7 @@ export default function SOR() {
       A: formattedMatrix(inputs.A, inputs.size),
       b: formattedMatrix(inputs.B, inputs.size),
       x0: formattedMatrix(inputs.X, inputs.size),
-      // norm,
+      norm: inputs.norm,
       omega: parseFloat(inputs.omega),
       tol: parseFloat(inputs.tol),
       niter: parseInt(inputs.niter),
